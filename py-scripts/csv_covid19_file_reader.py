@@ -13,8 +13,8 @@ class covid_record:
         self.commodity=commodity
         self.transport_mode=transport_mode
         self.measure=measure
-        self.value=value
-        self.cumulative=cumulative
+        self.value=int(value)
+        self.cumulative=int(cumulative)
     
     def __str__(self) -> str:
         string = "covid_record["+self.direction+", "+self.year+", "+self.date+", "+self.weekday+", "+self.country+", "+self.commodity+", "+self.transport_mode+", "+self.measure+", "+self.value+", "+self.cumulative+"]"
@@ -24,6 +24,7 @@ class covid_record:
 
 def run():
 
+    # открытие коннекшена с файлом
     with open('csv-files\effects-of-covid-19-on-trade-at-15-december-2021-provisional.csv', encoding="utf8") as f:
 
         csv_reader = csv.reader(f)
@@ -33,6 +34,7 @@ def run():
         for line in csv_reader:
             # пропустить первую строку и пустые строки
             if i>0 and len(line)!=0:
+                # считывание всех записей из таблицы в структуру 
                 covid_records.append(covid_record(*line))
             i+=1
         
